@@ -1,0 +1,79 @@
+'use client';
+
+import './layout.css';
+
+import { PropsWithChildren } from 'react';
+import { Layout } from 'antd';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+import type { CategoryType } from '@/types/api/category.type';
+import type { RegionType } from '@/types/api/region.type';
+
+import Header from './header';
+const Footer = dynamic(() => import('./footer'), { ssr: true });
+import { RouteNameEnum } from '@/constants/route.constant';
+import { stringifyTableParams } from '@/libs/utils/url.util';
+
+const { Content } = Layout;
+
+export type LayoutComponentProps = PropsWithChildren & {
+    categories?: CategoryType[];
+    regions?: RegionType[];
+};
+
+export function LayoutComponent({ children, categories, regions }: LayoutComponentProps) {
+    return (
+        <Layout
+            className="layout-transition"
+            style={{
+                overflowX: 'hidden',
+            }}
+        >
+            <Header
+                categoryMenu={categories?.map((c) => ({
+                    key: c.slug,
+                    label: (
+                        <Link
+                            className="netflix-link"
+                            href={`${RouteNameEnum.MOVIE_LIST_PAGE}?${stringifyTableParams({
+                                filters: [{ field: 'categories', value: c.slug, operator: 'in' }],
+                                sorters: [],
+                            })}`}
+                        >
+                            {c.name}
+                        </Link>
+                    ),
+                }))}
+                regionMenu={regions?.map((r) => ({
+                    key: r.slug,
+                    label: (
+                        <Link
+                            className="netflix-link"
+                            href={`${RouteNameEnum.MOVIE_LIST_PAGE}?${stringifyTableParams({
+                                filters: [{ field: 'countries', value: r.slug, operator: 'in' }],
+                                sorters: [],
+                            })}`}
+                        >
+                            {r.name}
+                        </Link>
+                    ),
+                }))}
+            />
+            <Content
+                className="netflix-content"
+                style={{
+                    minHeight: '110vh',
+                    position: 'relative',
+                    width: '100%',
+                }}
+            >
+                {children}
+            </Content>
+
+            <div className="footer-margin layout-transition">
+                <Footer categories={categories} regions={regions} />
+            </div>
+        </Layout>
+    );
+}
