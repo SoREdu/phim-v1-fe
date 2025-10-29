@@ -1,0 +1,154 @@
+/* Netflix-inspired layout styles */
+
+/* Global spacing variables */
+:root {
+    --layout-container-margin-desktop: 3rem;
+    --layout-container-margin-mobile: 0.5rem;
+    --layout-container-padding-mobile-header: 0.7rem;
+    --layout-padding-vertical: 2rem;
+    --layout-margin-top: 3rem;
+    --layout-margin-top-mobile: 1.5rem;
+    --layout-content-padding-top: 5rem;
+    --layout-content-padding-top-mobile: 4rem;
+    --vphim-color-bg-base: #141414;
+}
+
+/* Smooth scrolling for page */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--vphim-color-bg-base);
+}
+
+/* Transition effect for all links */
+a {
+    transition: all 0.2s ease;
+}
+
+/* Global content spacing for fixed header - applied to all layouts */
+.ant-layout-content {
+    padding-top: var(--layout-content-padding-top); /* Default padding for all content */
+    background-color: var(--vphim-color-bg-base, #141414); /* Fallback to dark color */
+}
+
+/* Layout container with consistent spacing */
+.layout-space-container {
+    margin-left: var(--layout-container-margin-desktop);
+    margin-right: var(--layout-container-margin-desktop);
+    padding-bottom: var(--layout-padding-vertical);
+    position: relative;
+    z-index: 1;
+    background-color: var(--vphim-color-bg-base, #141414); /* Fallback to dark color */
+}
+
+/* Main content container */
+.netflix-content {
+    transition: padding-top 0.3s ease;
+    background-color: var(--vphim-color-bg-base, #141414); /* Fallback to dark color */
+}
+
+/* Ensure consistent background color */
+.ant-layout {
+    background-color: var(--vphim-color-bg-base, #141414) !important; /* Fallback to dark color */
+}
+
+/* Special class for layouts without the fixed header */
+.no-header-layout {
+    padding-top: 0 !important;
+}
+
+/* Special class for auth pages */
+.auth-layout .ant-layout-content {
+    padding-top: 0;
+}
+
+/* Smooth page transitions */
+.page-transition-enter {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.page-transition-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-transition-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Netflix-style scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--vphim-color-primary, #e50914);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+    outline: 2px solid var(--vphim-color-primary, #e50914);
+    outline-offset: 2px;
+}
+
+/* Transition for layout elements */
+.layout-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Footer margin adjustment */
+.footer-margin {
+    margin-top: var(--layout-margin-top);
+}
+
+/* Media queries for responsive adjustments */
+@media (max-width: 768px) {
+    .ant-layout-content {
+        padding-top: var(--layout-content-padding-top-mobile);
+    }
+
+    .netflix-content {
+        padding-top: var(--layout-content-padding-top-mobile);
+    }
+
+    .layout-space-container {
+        margin-left: var(--layout-container-margin-mobile);
+        margin-right: var(--layout-container-margin-mobile);
+    }
+
+    .footer-margin {
+        margin-top: var(--layout-margin-top-mobile);
+    }
+
+    /* Reduce Ant Design Layout header padding on small screens */
+    .ant-layout-header {
+        padding: 0 var(--layout-container-padding-mobile-header) !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .netflix-content {
+        padding-top: var(--layout-content-padding-top);
+    }
+}

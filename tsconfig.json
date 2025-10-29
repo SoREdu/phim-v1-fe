@@ -1,0 +1,49 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": ["es2020", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+
+        "jsx": "preserve",
+        "allowJs": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": false,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "incremental": true,
+        "strictPropertyInitialization": false,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "@/*": ["src/*"]
+        }
+    },
+    "include": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx",
+        "../../apps/fe/.next/types/**/*.ts",
+        "../../dist/apps/fe/.next/types/**/*.ts",
+        "next-env.d.ts",
+        ".next/types/**/*.ts"
+    ],
+    "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "tmp"]
+}

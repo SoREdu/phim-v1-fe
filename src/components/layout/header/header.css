@@ -1,0 +1,185 @@
+.ant-menu-horizontal > .ant-menu-item::after,
+.ant-menu-horizontal > .ant-menu-submenu::after {
+    border: none;
+}
+
+/* Netflix-style header customizations */
+.netflix-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Optimize transitions for performance */
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease,
+        box-shadow 0.3s ease, height 0.3s ease;
+    padding: 0 24px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Improve GPU acceleration */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.netflix-header.transparent {
+    background-color: transparent;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    box-shadow: none;
+    height: 80px;
+}
+
+.netflix-header.scrolled {
+    background-color: var(--vphim-color-bg-base, #141414);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+    height: 60px;
+    backdrop-filter: blur(10px);
+}
+
+/* Logo transitions */
+.netflix-header .logo-container {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.netflix-header.transparent .logo-container {
+    transform: scale(1.1);
+}
+
+.netflix-header.scrolled .logo-container {
+    transform: scale(0.9);
+}
+
+/* Netflix-style navigation menu */
+.netflix-menu.ant-menu {
+    background: transparent;
+    border: none;
+    color: var(--vphim-color-text, rgba(255, 255, 255, 0.95));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.netflix-header.scrolled .netflix-menu.ant-menu {
+    line-height: 58px;
+}
+
+.netflix-header.transparent .netflix-menu.ant-menu {
+    line-height: 78px;
+}
+
+.netflix-menu.ant-menu-horizontal .ant-menu-item,
+.netflix-menu.ant-menu-horizontal .ant-menu-submenu {
+    padding: 0 16px;
+    margin: 0;
+    border-bottom: none;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.netflix-menu.ant-menu-horizontal .ant-menu-item:hover,
+.netflix-menu.ant-menu-horizontal .ant-menu-submenu:hover {
+    color: var(--vphim-color-primary, #e50914);
+}
+
+.netflix-menu.ant-menu-horizontal .ant-menu-item-selected {
+    color: var(--vphim-color-primary, #e50914);
+    font-weight: 600;
+}
+
+/* Drawer styles */
+.netflix-drawer .ant-drawer-content {
+    background-color: var(--vphim-color-bg-base, #141414);
+}
+
+.netflix-drawer .ant-drawer-header {
+    background-color: var(--vphim-color-bg-base, #141414);
+    border-bottom: 1px solid var(--vphim-color-border-secondary, rgba(255, 255, 255, 0.06));
+}
+
+.netflix-drawer .ant-drawer-title {
+    color: var(--vphim-color-text, rgba(255, 255, 255, 0.95));
+}
+
+/* Mobile menu button */
+.netflix-mobile-menu-btn {
+    background: transparent;
+    border: none;
+    color: var(--vphim-color-text, rgba(255, 255, 255, 0.95));
+    font-size: 24px;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.netflix-mobile-menu-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.netflix-header.scrolled .netflix-mobile-menu-btn {
+    font-size: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .netflix-header {
+        padding: 0 8px;
+        height: 60px;
+    }
+
+    .netflix-header.transparent {
+        height: 70px;
+    }
+
+    .netflix-header.scrolled {
+        height: 50px;
+    }
+
+    .netflix-menu.ant-menu-horizontal .ant-menu-item,
+    .netflix-menu.ant-menu-horizontal .ant-menu-submenu {
+        padding: 0 8px;
+    }
+}
+
+/* Animation for header elements */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.netflix-header .header-animated {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Hidden header state - optimize for performance */
+.netflix-header.header-hidden {
+    transform: translateY(-105%) !important;
+    box-shadow: none;
+    /* Only transition transform for better performance */
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
+/* Add a non-fixed mode for better performance during scrolling */
+.netflix-header.position-absolute {
+    position: absolute;
+    transform: translateY(-105%);
+    transition: none;
+}
+
+/* Optimize for the scrolling state - completely hide when scrolling */
+.netflix-header.during-scroll {
+    transform: translateY(-105%) !important;
+    transition: transform 0.1s ease !important;
+    pointer-events: none;
+}
